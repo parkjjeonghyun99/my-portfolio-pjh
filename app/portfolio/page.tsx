@@ -177,7 +177,7 @@ export default function PortfolioPage() {
           <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight">
             박정현
             <span className="block text-2xl sm:text-3xl font-bold text-gray-400 mt-2">
-              AI · Data · Web Developer
+              AI · Data Analyst
             </span>
           </h1>
           <p className="mt-6 text-gray-600 text-base sm:text-lg max-w-2xl leading-relaxed">
