@@ -15,9 +15,14 @@ type Project = {
   sections: { title: string; content: string }[];
   result: string;
   pdfUrl?: string;
+  dataDictUrl?: string;
+  rawDataUrl?: string;
   notebooks?: { label: string; url: string }[];
   color: string;
 };
+
+const BASE = "https://github.com/parkjjeonghyun99/my-portfolio-pjh/blob/main";
+const BASE_TREE = "https://github.com/parkjjeonghyun99/my-portfolio-pjh/tree/main";
 
 const PROJECTS: Project[] = [
   {
@@ -47,17 +52,17 @@ const PROJECTS: Project[] = [
       {
         title: "🛠 기술 선택 이유",
         content:
-          "객체탐지 모델로 YOLOv8을 선택했습니다. v9, v10 등 이후 버전 대비 정확도 면에서 다소 낮을 수 있으나, 속도와 경량화 측면에서 종합적으로 가장 적합하다고 판단했습니다. 블랙박스 영상의 실시간성과 처리 효율을 고려하면 속도·경량화가 정확도보다 우선순위가 높았습니다. 행동 분류 모델로는 TSN과 TSM을 비교했고, 단순 장소 분류보다 차량 A/B의 움직임을 시간 흐름 속에서 파악하는 것이 핵심이었기 때문에 프레임 간 정보 교환이 가능한 TSM을 최종 채택했습니다. VLM은 Qwen2.5-VL-32B와 LLaVA-NeXT-Video-32B를 비교했고, 한국어 출력 품질·핵심 객체 식별력·허위 정보 억제 측면에서 Qwen2.5-VL-32B가 전반적으로 우수했습니다.",
+          "객체탐지 모델로 YOLOv8을 선택했습니다. v9, v10 등 이후 버전 대비 정확도 면에서 다소 낮을 수 있으나, 속도와 경량화 측면에서 종합적으로 가장 적합하다고 판단했습니다. 행동 분류 모델로는 TSN과 TSM을 비교했고, 차량 A/B의 움직임을 시간 흐름 속에서 파악하는 것이 핵심이었기 때문에 프레임 간 정보 교환이 가능한 TSM을 최종 채택했습니다. VLM은 Qwen2.5-VL-32B와 LLaVA-NeXT-Video-32B를 비교했고, 한국어 출력 품질·핵심 객체 식별력·허위 정보 억제 측면에서 Qwen2.5-VL-32B가 전반적으로 우수했습니다.",
       },
       {
         title: "⚙️ 핵심 과정 및 개선",
         content:
-          "데이터 전처리 단계에서 AI Hub 17,518건 중 조도 부족·역광·저화질 영상을 제거하고, 직선도로에 편중된 데이터를 5개 장소별 500건씩 균등 샘플링했습니다. 차량 A/B 행동 클래스 불균형은 A/B 쌍 관계를 유지한 Oversampling으로 해결했습니다. YOLOv8에 Gamma Correction 증강을 적용해 어두운 영상에서의 차량 경계 인식을 개선했고(IoU 0.786→0.792), TSM에 SE Block과 Temporal Attention을 추가해 차량A 행동 분류 정확도를 54%→62%로 향상시켰습니다. VLM 입력 시 단순 영상보다 bbox 영상+분류 결과를 함께 제공했을 때 사실 일관성이 56.4%에서 93.5%로 크게 향상되었습니다.",
+          "데이터 전처리 단계에서 AI Hub 17,518건 중 조도 부족·역광·저화질 영상을 제거하고, 직선도로에 편중된 데이터를 5개 장소별 500건씩 균등 샘플링했습니다. YOLOv8에 Gamma Correction 증강을 적용해 어두운 영상에서의 차량 경계 인식을 개선했고(IoU 0.786→0.792), TSM에 SE Block과 Temporal Attention을 추가해 차량A 행동 분류 정확도를 54%→62%로 향상시켰습니다. VLM 입력 시 bbox 영상+분류 결과를 함께 제공했을 때 사실 일관성이 56.4%에서 93.5%로 크게 향상되었습니다.",
       },
       {
         title: "🔄 다른 접근 방식과의 비교",
         content:
-          "행동 분류 모델로 TSN도 검토했으나, 사고 장소 분류에서는 TSN(0.72)이 TSM(0.69)보다 높은 반면, 차량 행동 분류에서는 TSM이 TSN을 크게 앞섰습니다. 차량 행동 판단이 핵심 목적이었기에 TSM을 선택했습니다. VLM 프롬프트 방식도 Zero-shot, Few-shot, CoT를 모두 실험했고, CLIP Score(영상과 생성 문장의 의미적 일치도) 기준으로 Zero-shot(0.574)이 가장 높아 최종 채택했습니다.",
+          "행동 분류 모델로 TSN도 검토했으나, 차량 행동 분류에서 TSM이 TSN을 크게 앞섰습니다. VLM 프롬프트 방식도 Zero-shot, Few-shot, CoT를 모두 실험했고, CLIP Score 기준으로 Zero-shot(0.574)이 가장 높아 최종 채택했습니다.",
       },
     ],
     result:
@@ -72,12 +77,14 @@ const PROJECTS: Project[] = [
     team: "포스코 청년 AI·Big Data 아카데미 · A4팀 (5인)",
     tags: ["Random Forest", "XGBoost", "LightGBM", "chi-squared", "ANOVA", "Python"],
     pdfUrl: "/bigdata-project.pdf",
+    dataDictUrl: `${BASE}/notebooks/Bigdata_Project/sts_data_dictionary.pdf`,
+    rawDataUrl: `${BASE_TREE}/notebooks/Bigdata_Project/data`,
     notebooks: [
-      { label: "전체 분석", url: "https://github.com/parkjjeonghyun99/my-portfolio-pjh/blob/main/notebooks/Bigdata_Project_A4.ipynb" },
-      { label: "소둔산세 EDA", url: "https://github.com/parkjjeonghyun99/my-portfolio-pjh/blob/main/notebooks/Bigdata_Project_A4_eda_소둔산세.ipynb" },
-      { label: "연주공정 EDA", url: "https://github.com/parkjjeonghyun99/my-portfolio-pjh/blob/main/notebooks/Bigdata_Project_A4_eda_연주공정.ipynb" },
-      { label: "제강공정 EDA", url: "https://github.com/parkjjeonghyun99/my-portfolio-pjh/blob/main/notebooks/Bigdata_Project_A4_eda_제강공정.ipynb" },
-      { label: "열연 EDA", url: "https://github.com/parkjjeonghyun99/my-portfolio-pjh/blob/main/notebooks/Bigdata_Project_A4_eda_열연.ipynb" },
+      { label: "전체 분석", url: `${BASE}/notebooks/Bigdata_Project/Bigdata_Project_A4.ipynb` },
+      { label: "소둔산세 EDA", url: `${BASE}/notebooks/Bigdata_Project/Bigdata_Project_A4_eda_소둔산세.ipynb` },
+      { label: "연주공정 EDA", url: `${BASE}/notebooks/Bigdata_Project/Bigdata_Project_A4_eda_연주공정.ipynb` },
+      { label: "제강공정 EDA", url: `${BASE}/notebooks/Bigdata_Project/Bigdata_Project_A4_eda_제강공정.ipynb` },
+      { label: "열연 EDA", url: `${BASE}/notebooks/Bigdata_Project/Bigdata_Project_A4_eda_열연.ipynb` },
     ],
     overview:
       "STS304(18% Cr / 8% Ni 오스테나이트계 스테인리스강)의 M형 결함 불량률이 2022년 0.2%에서 2025년 2.7%로 급증하며 연간 손실 cost 837억 원이 발생했습니다. 약 23,000건의 제강·연주·열연·소둔산세 공정 데이터를 분석하여 핵심 영향인자(Vital Few)를 도출하고, 최적 조업 조건을 제시해 손실 비용을 186억 원 수준으로 절감하는 방안을 마련했습니다.",
@@ -98,17 +105,17 @@ const PROJECTS: Project[] = [
       {
         title: "🛠 분석 접근 방식",
         content:
-          "통계적 가설 검정은 각 변수가 불량 발생과 유의미한 관계가 있는지 판단하는 근거를 제공하기 때문에 우선적으로 수행되어야 했습니다. 머신러닝 모델에 변수를 넣기 전에 chi-squared test, t-test, ANOVA로 유의미한 변수를 먼저 선별하여 모델 성능과 해석력을 높이고자 하였습니다. 추가로 도메인 지식도 적극 활용하며, 통계적으로는 p-value > 0.05로 유의미하지 않았던 델타 페라이트 함량 변수를 특허 문헌(대한민국 특허청 제 10-0397295호) 기반으로 6~8% 범위를 벗어날 경우 결함 발생 우려가 있다는 근거로 Vital Few에 포함시켰습니다.",
+          "통계적 가설 검정은 각 변수가 불량 발생과 유의미한 관계가 있는지 판단하는 근거를 제공하기 때문에 우선적으로 수행되어야 했습니다. chi-squared test, t-test, ANOVA로 유의미한 변수를 먼저 선별하여 모델 성능과 해석력을 높이고자 하였습니다. 통계적으로는 p-value > 0.05로 유의미하지 않았던 델타 페라이트 함량 변수를 특허 문헌(대한민국 특허청 제 10-0397295호) 기반으로 Vital Few에 포함시켰습니다.",
       },
       {
         title: "⚙️ 모델 선정 과정",
         content:
-          "Decision Tree, Random Forest, Gradient Boost, XGBoost, LightGBM 5개 모델을 비교했습니다. 불량 미검출(False Negative) 최소화가 핵심 목표였기 때문에 Recall을 우선 지표로 삼았고, AUC와 F1-score를 종합적으로 검토했습니다. Random Forest가 Recall 0.486, AUC 0.858로 가장 균형 잡힌 성능을 보여 최종 선정했습니다. Feature Importance 분석 결과 slab 장입온도(0.094), 소둔산세 후 두께(0.081), 예열대 온도(0.063) 순으로 중요도가 높았으며, 이는 통계 분석에서 도출한 Vital Few와 일치해 분석 결과의 신뢰도를 높였습니다.",
+          "Decision Tree, Random Forest, Gradient Boost, XGBoost, LightGBM 5개 모델을 비교했습니다. 불량 미검출(False Negative) 최소화가 핵심 목표였기 때문에 Recall을 우선 지표로 삼았고, AUC와 F1-score를 종합적으로 검토했습니다. Random Forest가 Recall 0.486, AUC 0.858로 가장 균형 잡힌 성능을 보여 최종 선정했습니다. Feature Importance 분석 결과 slab 장입온도(0.094), 소둔산세 후 두께(0.081), 예열대 온도(0.063) 순으로 중요도가 높았습니다.",
       },
       {
         title: "🔄 최적 조업 조건 도출",
         content:
-          "KDE plot과 Boxplot을 활용해 각 Vital Few의 최적 구간을 도출했습니다. 열연-연주 일자 차이 3.28일 미만 유지 시 불량률 4.86%p 감소, 총 재로시간 206분 미만 유지 시 2.08%p 감소, 가열대-예열대 온도 차이 150~170°C 유지 시 1.78%p 감소가 가능합니다. 데이터 불균형 문제는 SMOTE로 해결했으며, 공정 모니터링을 위한 슬라브 장입온도 3σ 관리도(UCL 434.6 / Mean 351.2 / LCL 267.9)를 수립해 이상치 즉시 감지 체계를 구축했습니다.",
+          "KDE plot과 Boxplot을 활용해 각 Vital Few의 최적 구간을 도출했습니다. 열연-연주 일자 차이 3.28일 미만 유지 시 불량률 4.86%p 감소, 총 재로시간 206분 미만 유지 시 2.08%p 감소, 가열대-예열대 온도 차이 150~170°C 유지 시 1.78%p 감소가 가능합니다. 슬라브 장입온도 3σ 관리도(UCL 434.6 / Mean 351.2 / LCL 267.9)를 수립해 이상치 즉시 감지 체계를 구축했습니다.",
       },
     ],
     result:
@@ -144,13 +151,21 @@ function ProjectCard({ project }: { project: Project }) {
         <div className="flex items-center gap-3 flex-wrap">
           <span className={`text-xs font-semibold px-2 py-0.5 rounded ${badgeBg}`}>{project.period}</span>
           {project.pdfUrl && (
-            <a
-              href={project.pdfUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="text-xs bg-blue-50 text-blue-600 border border-blue-200 px-2 py-0.5 rounded hover:bg-blue-100 transition"
-            >
+            <a href={project.pdfUrl} target="_blank" rel="noreferrer"
+              className="text-xs bg-blue-50 text-blue-600 border border-blue-200 px-2 py-0.5 rounded hover:bg-blue-100 transition">
               📄 발표자료
+            </a>
+          )}
+          {project.dataDictUrl && (
+            <a href={project.dataDictUrl} target="_blank" rel="noreferrer"
+              className="text-xs bg-purple-50 text-purple-600 border border-purple-200 px-2 py-0.5 rounded hover:bg-purple-100 transition">
+              📋 Data Dictionary
+            </a>
+          )}
+          {project.rawDataUrl && (
+            <a href={project.rawDataUrl} target="_blank" rel="noreferrer"
+              className="text-xs bg-orange-50 text-orange-600 border border-orange-200 px-2 py-0.5 rounded hover:bg-orange-100 transition">
+              📂 Raw Data
             </a>
           )}
         </div>
@@ -160,13 +175,8 @@ function ProjectCard({ project }: { project: Project }) {
         {project.notebooks && (
           <div className="flex flex-wrap gap-2 mt-2">
             {project.notebooks.map(n => (
-              <a
-                key={n.label}
-                href={n.url}
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs bg-green-50 text-green-600 border border-green-200 px-2 py-0.5 rounded hover:bg-green-100 transition"
-              >
+              <a key={n.label} href={n.url} target="_blank" rel="noreferrer"
+                className="text-xs bg-green-50 text-green-600 border border-green-200 px-2 py-0.5 rounded hover:bg-green-100 transition">
                 📓 {n.label}
               </a>
             ))}
@@ -189,10 +199,8 @@ function ProjectCard({ project }: { project: Project }) {
         ))}
       </div>
 
-      <button
-        onClick={() => setOpen(v => !v)}
-        className="text-sm font-medium text-gray-500 hover:text-gray-800 transition"
-      >
+      <button onClick={() => setOpen(v => !v)}
+        className="text-sm font-medium text-gray-500 hover:text-gray-800 transition">
         {open ? "▲ 상세 내용 접기" : "▼ 상세 내용 보기"}
       </button>
 
@@ -239,18 +247,12 @@ export default function PortfolioPage() {
             Next.js 기반 웹 페이지를 만들어 Vercel에 배포하는 작업을 진행했습니다.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href="https://github.com/parkjjeonghyun99"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 bg-gray-900 text-white text-sm font-medium px-5 py-2.5 rounded-xl hover:bg-gray-700 transition"
-            >
+            <a href="https://github.com/parkjjeonghyun99" target="_blank" rel="noreferrer"
+              className="inline-flex items-center gap-2 bg-gray-900 text-white text-sm font-medium px-5 py-2.5 rounded-xl hover:bg-gray-700 transition">
               GitHub
             </a>
-            <a
-              href="/resume"
-              className="inline-flex items-center gap-2 border border-gray-300 text-gray-700 text-sm font-medium px-5 py-2.5 rounded-xl hover:bg-gray-50 transition"
-            >
+            <a href="/resume"
+              className="inline-flex items-center gap-2 border border-gray-300 text-gray-700 text-sm font-medium px-5 py-2.5 rounded-xl hover:bg-gray-50 transition">
               이력서 보기
             </a>
           </div>
@@ -281,12 +283,8 @@ export default function PortfolioPage() {
       <footer className="border-t border-gray-200 bg-white">
         <div className="max-w-6xl mx-auto px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-sm text-gray-400">© 2026 박정현</p>
-          <a
-            href="https://github.com/parkjjeonghyun99"
-            target="_blank"
-            rel="noreferrer"
-            className="text-sm text-gray-400 hover:text-gray-700 transition"
-          >
+          <a href="https://github.com/parkjjeonghyun99" target="_blank" rel="noreferrer"
+            className="text-sm text-gray-400 hover:text-gray-700 transition">
             github.com/parkjjeonghyun99
           </a>
         </div>
