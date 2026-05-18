@@ -80,15 +80,7 @@ export default function Home() {
       </section>
 
       <section className="mb-10">
-        <div className="flex items-center gap-3 border-b-2 border-gray-800 pb-1 mb-4">
-          <h2 className="text-xl font-bold">PROJECTS · 프로젝트 경험</h2>
-          <a href="/ai-project.pdf" target="_blank" className="text-xs bg-blue-50 text-blue-600 border border-blue-200 px-2 py-0.5 rounded hover:bg-blue-100 transition">
-            📄 한블리 발표자료
-          </a>
-          <a href="/bigdata-project.pdf" target="_blank" className="text-xs bg-blue-50 text-blue-600 border border-blue-200 px-2 py-0.5 rounded hover:bg-blue-100 transition">
-            📄 STS304 발표자료
-          </a>
-        </div>
+        <h2 className="text-xl font-bold border-b-2 border-gray-800 pb-1 mb-4">PROJECTS · 프로젝트 경험</h2>
         <div className="space-y-6">
 
           <div>
