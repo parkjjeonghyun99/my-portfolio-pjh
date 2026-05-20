@@ -256,10 +256,7 @@ export default function PortfolioPage() {
             </span>
           </h1>
           <p className="mt-6 text-gray-600 text-base sm:text-lg leading-relaxed">
-            통계적 사고를 바탕으로 데이터에서 인사이트를 도출하고,
-          </p>
-          <p className="mt-2 text-gray-600 text-base sm:text-lg leading-relaxed">
-            이를 실제 문제 해결에 연결하는 방향을 추구합니다.
+            통계적 사고를 바탕으로 데이터에서 인사이트를 도출하고, 이를 실제 문제 해결에 연결하는 방향을 추구합니다.
           </p>
           <p className="mt-2 text-gray-600 text-base sm:text-lg leading-relaxed">
             팀 프로젝트를 통해 컴퓨터 비전·자연어처리를 활용한 교통사고 협의서 작성 AI 시스템을 개발했습니다.
