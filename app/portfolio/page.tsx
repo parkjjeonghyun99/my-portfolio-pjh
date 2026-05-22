@@ -145,9 +145,17 @@ const PRACTICES: Practice[] = [
     title: "인도 중고차 가격 예측 분석",
     subtitle: "Car.csv 기반 중고차 가격 예측 모델 개발 및 영향 변수 분석",
     team: "포스코 청년 AI·Big Data 아카데미 · 팀 종합 실습",
-    tags: ["Random Forest", "Gradient Boosting", "Ridge", "Lasso", "ElasticNet", "Python"],
+    tags: ["Random Forest", "Gradient Boosting", "XGBoost", "OLS", "Decision Tree", "Python"],
     overview:
-      "인도 중고차 데이터(Car.csv)를 활용하여 차량 가격(Price) 예측 모델을 개발하고, 가격에 영향을 미치는 핵심 변수를 분석한 종합 실습입니다. 결측치·이상치 처리, 파생변수 생성, 인코딩을 거쳐 규제화 선형회귀·의사결정나무·랜덤포레스트·그래디언트부스팅 모델을 비교했습니다.",
+      "7,253건(13개 변수)의 인도 중고차 데이터(Car.csv)를 활용해 차량 가격(Price, 단위: 천 원) 예측 모델을 개발하고 핵심 영향 변수를 분석했습니다. " +
+      "목표변수 결측치·결측 비율 86%인 New_Price 제거 후, 동일 차량 모델명(Name) 기준 제원 보완 → 평균값 대체 순서로 결측치를 처리했습니다. " +
+      "Kilometers_Driven=6,500,000 이상치를 제거하고, Lamborghini의 낮은 연비(6.4 kmpl)는 차종 특성을 고려해 유지했습니다. " +
+      "차 나이(car_age = 2020 − Year), 연간주행거리(KilometerPerYear), 브랜드 등급(Brand_Tier), 지역 구분(Region) 등 파생변수를 생성하고, " +
+      "왜도 > 1인 4개 변수(KilometerPerYear, Kilometers_Driven, Power, Seats)에 로그 변환을 적용해 분포 비대칭을 완화했습니다. " +
+      "OLS 선형회귀(R²=0.887), Decision Tree(R²=0.842), Random Forest(R²=0.914), Gradient Boost(R²=0.925), XGBoost(R²=0.931)를 train:test=7:3으로 비교했고, " +
+      "MAPE·MSE·RMSE·MAE 전 지표에서 최소 오차를 기록한 XGBoost를 최종 Best Model로 선정했습니다(MAPE=1.72%). " +
+      "핵심 인자는 Power → Transmission → Brand_Tier → car_age → Name_Toyota 순이었으며, " +
+      "지역별 car_age 분포 분석을 통해 Kochi·Coimbatore(신차급 보증 매물 특화) vs Kolkata·Pune(가성비 박리다매) 차별화 마케팅 전략을 도출했습니다.",
     notebookUrl: `${BASE}/notebooks/Used_Car_Task/Car_예측분석.ipynb`,
     pptUrl: `${BASE}/notebooks/Used_Car_Task/인도_중고차시장_PPT.pdf`,
   },
