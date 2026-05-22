@@ -21,9 +21,6 @@ type Project = {
   color: string;
 };
 
-const BASE = "https://github.com/parkjjeonghyun99/my-portfolio-pjh/blob/main";
-const BASE_TREE = "https://github.com/parkjjeonghyun99/my-portfolio-pjh/tree/main";
-
 type Practice = {
   id: number;
   no: string;
@@ -37,21 +34,8 @@ type Practice = {
   pptUrl?: string;
 };
 
-const PRACTICES: Practice[] = [
-  {
-    id: 1,
-    no: "종합실습 1",
-    period: "2026.03.11 – 2026.03.16",
-    title: "인도 중고차 가격 예측 분석",
-    subtitle: "Car.csv 기반 중고차 가격 예측 모델 개발 및 영향 변수 분석",
-    team: "포스코 청년 AI·Big Data 아카데미 · 팀 종합 실습",
-    tags: ["Random Forest", "Gradient Boosting", "Ridge", "Lasso", "ElasticNet", "Python"],
-    overview:
-      "인도 중고차 데이터(Car.csv)를 활용하여 차량 가격(Price) 예측 모델을 개발하고, 가격에 영향을 미치는 핵심 변수를 분석한 종합 실습입니다. 결측치·이상치 처리, 파생변수 생성, 인코딩을 거쳐 규제화 선형회귀·의사결정나무·랜덤포레스트·그래디언트부스팅 모델을 비교했습니다.",
-    notebookUrl: `${BASE}/notebooks/Used_Car_Task/Car_예측분석.ipynb`,
-    pptUrl: `${BASE}/notebooks/Used_Car_Task/인도_중고차시장_PPT.pdf`,
-  },
-];
+const BASE = "https://github.com/parkjjeonghyun99/my-portfolio-pjh/blob/main";
+const BASE_TREE = "https://github.com/parkjjeonghyun99/my-portfolio-pjh/tree/main";
 
 const PROJECTS: Project[] = [
   {
@@ -153,6 +137,22 @@ const PROJECTS: Project[] = [
   },
 ];
 
+const PRACTICES: Practice[] = [
+  {
+    id: 1,
+    no: "종합실습 1",
+    period: "2026.03.11 – 2026.03.16",
+    title: "인도 중고차 가격 예측 분석",
+    subtitle: "Car.csv 기반 중고차 가격 예측 모델 개발 및 영향 변수 분석",
+    team: "포스코 청년 AI·Big Data 아카데미 · 팀 종합 실습",
+    tags: ["Random Forest", "Gradient Boosting", "Ridge", "Lasso", "ElasticNet", "Python"],
+    overview:
+      "인도 중고차 데이터(Car.csv)를 활용하여 차량 가격(Price) 예측 모델을 개발하고, 가격에 영향을 미치는 핵심 변수를 분석한 종합 실습입니다. 결측치·이상치 처리, 파생변수 생성, 인코딩을 거쳐 규제화 선형회귀·의사결정나무·랜덤포레스트·그래디언트부스팅 모델을 비교했습니다.",
+    notebookUrl: `${BASE}/notebooks/Used_Car_Task/Car_예측분석.ipynb`,
+    pptUrl: `${BASE}/notebooks/Used_Car_Task/인도_중고차시장_PPT.pdf`,
+  },
+];
+
 const SKILLS = [
   { category: "ML / DL", items: ["Scikit-learn", "Random Forest", "XGBoost", "LightGBM", "YOLOv8", "OpenCV", "Qwen2.5-VL-32B", "Prompt Engineering"] },
   { category: "Data Analysis", items: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "chi-squared", "t-test", "ANOVA", "statsmodels"] },
@@ -174,7 +174,6 @@ function ProjectCard({ project }: { project: Project }) {
   const badgeBg = project.color === "blue" ? "bg-blue-50 text-blue-700" : "bg-indigo-50 text-indigo-700";
   const headingColor = project.color === "blue" ? "text-blue-600" : "text-indigo-600";
   const dotColor = project.color === "blue" ? "bg-blue-400" : "bg-indigo-400";
-
   const hasResources = project.pdfUrl || project.dataDictUrl || project.rawDataUrl || project.notebooks;
 
   return (
@@ -185,13 +184,10 @@ function ProjectCard({ project }: { project: Project }) {
         <p className="text-sm text-gray-600 mt-0.5">{project.subtitle}</p>
         <p className="text-xs text-gray-400 mt-1">{project.team}</p>
       </div>
-
       <div className="flex flex-wrap gap-2">
         {project.tags.map(t => <Tag key={t} text={t} />)}
       </div>
-
       <p className="text-gray-700 text-sm leading-relaxed">{project.overview}</p>
-
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {project.highlights.map(h => (
           <div key={h.label} className="bg-gray-50 rounded-xl p-3">
@@ -200,12 +196,10 @@ function ProjectCard({ project }: { project: Project }) {
           </div>
         ))}
       </div>
-
       <button onClick={() => setOpen(v => !v)}
         className="text-sm font-medium text-gray-500 hover:text-gray-800 transition">
         {open ? "▲ 상세 내용 접기" : "▼ 상세 내용 보기"}
       </button>
-
       {hasResources && (
         <div>
           <button onClick={() => setResourceOpen(v => !v)}
@@ -250,7 +244,6 @@ function ProjectCard({ project }: { project: Project }) {
           )}
         </div>
       )}
-
       {open && (
         <div className="space-y-4 pt-1">
           {project.sections.map(s => (
@@ -323,14 +316,14 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-8 py-4 pb-20">
+      <section className="max-w-6xl mx-auto px-8 py-4">
         <h2 className="text-xl font-bold mb-6">Projects</h2>
         <div className="space-y-8">
           {PROJECTS.map(p => <ProjectCard key={p.id} project={p} />)}
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-8 py-4 pb-20">
+      <section className="max-w-6xl mx-auto px-8 py-12 pb-20">
         <h2 className="text-xl font-bold mb-6">종합실습</h2>
         <div className="space-y-4">
           {PRACTICES.map(p => (
@@ -362,6 +355,8 @@ export default function PortfolioPage() {
           ))}
         </div>
       </section>
+
+      <footer className="border-t border-gray-200 bg-white">
         <div className="max-w-6xl mx-auto px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-sm text-gray-400">© 2026 박정현</p>
           <a href="https://github.com/parkjjeonghyun99" target="_blank" rel="noreferrer"
