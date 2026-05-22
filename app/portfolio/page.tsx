@@ -24,6 +24,35 @@ type Project = {
 const BASE = "https://github.com/parkjjeonghyun99/my-portfolio-pjh/blob/main";
 const BASE_TREE = "https://github.com/parkjjeonghyun99/my-portfolio-pjh/tree/main";
 
+type Practice = {
+  id: number;
+  no: string;
+  period: string;
+  title: string;
+  subtitle: string;
+  team: string;
+  tags: string[];
+  overview: string;
+  notebookUrl?: string;
+  pptUrl?: string;
+};
+
+const PRACTICES: Practice[] = [
+  {
+    id: 1,
+    no: "종합실습 1",
+    period: "2026.03.11 – 2026.03.16",
+    title: "인도 중고차 가격 예측 분석",
+    subtitle: "Car.csv 기반 중고차 가격 예측 모델 개발 및 영향 변수 분석",
+    team: "포스코 청년 AI·Big Data 아카데미 · 팀 종합 실습",
+    tags: ["Random Forest", "Gradient Boosting", "Ridge", "Lasso", "ElasticNet", "Python"],
+    overview:
+      "인도 중고차 데이터(Car.csv)를 활용하여 차량 가격(Price) 예측 모델을 개발하고, 가격에 영향을 미치는 핵심 변수를 분석한 종합 실습입니다. 결측치·이상치 처리, 파생변수 생성, 인코딩을 거쳐 규제화 선형회귀·의사결정나무·랜덤포레스트·그래디언트부스팅 모델을 비교했습니다.",
+    notebookUrl: `${BASE}/notebooks/Used_Car_Task/Car_예측분석.ipynb`,
+    pptUrl: `${BASE}/notebooks/Used_Car_Task/인도_중고차시장_PPT.pdf`,
+  },
+];
+
 const PROJECTS: Project[] = [
   {
     id: 1,
@@ -256,7 +285,10 @@ export default function PortfolioPage() {
             </span>
           </h1>
           <p className="mt-6 text-gray-600 text-base sm:text-lg leading-relaxed">
-            통계적 사고를 바탕으로 데이터에서 인사이트를 도출하고, 이를 실제 문제 해결에 연결하는 방향을 추구합니다.
+            통계적 사고를 바탕으로 데이터에서 인사이트를 도출하고,
+          </p>
+          <p className="mt-2 text-gray-600 text-base sm:text-lg leading-relaxed">
+            이를 실제 문제 해결에 연결하는 방향을 추구합니다.
           </p>
           <p className="mt-2 text-gray-600 text-base sm:text-lg leading-relaxed">
             팀 프로젝트를 통해 컴퓨터 비전·자연어처리를 활용한 교통사고 협의서 작성 AI 시스템을 개발했습니다.
@@ -298,7 +330,38 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <footer className="border-t border-gray-200 bg-white">
+      <section className="max-w-6xl mx-auto px-8 py-4 pb-20">
+        <h2 className="text-xl font-bold mb-6">종합실습</h2>
+        <div className="space-y-4">
+          {PRACTICES.map(p => (
+            <div key={p.id} className="bg-white rounded-2xl shadow-sm p-6 sm:p-8 border-l-4 border-gray-300">
+              <div className="flex items-center gap-3 flex-wrap">
+                <span className="text-xs font-semibold px-2 py-0.5 rounded bg-gray-100 text-gray-600">{p.period}</span>
+                <span className="text-xs font-semibold px-2 py-0.5 rounded bg-gray-800 text-white">{p.no}</span>
+                {p.pptUrl && (
+                  <a href={p.pptUrl} target="_blank" rel="noreferrer"
+                    className="text-xs bg-blue-50 text-blue-600 border border-blue-200 px-2 py-0.5 rounded hover:bg-blue-100 transition">
+                    📄 발표자료
+                  </a>
+                )}
+                {p.notebookUrl && (
+                  <a href={p.notebookUrl} target="_blank" rel="noreferrer"
+                    className="text-xs bg-green-50 text-green-600 border border-green-200 px-2 py-0.5 rounded hover:bg-green-100 transition">
+                    📓 실습 노트북
+                  </a>
+                )}
+              </div>
+              <h3 className="mt-2 text-lg font-bold text-gray-800">{p.title}</h3>
+              <p className="text-sm text-gray-600 mt-0.5">{p.subtitle}</p>
+              <p className="text-xs text-gray-400 mt-1">{p.team}</p>
+              <div className="flex flex-wrap gap-2 mt-3">
+                {p.tags.map(t => <Tag key={t} text={t} />)}
+              </div>
+              <p className="text-gray-700 text-sm leading-relaxed mt-3">{p.overview}</p>
+            </div>
+          ))}
+        </div>
+      </section>
         <div className="max-w-6xl mx-auto px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-sm text-gray-400">© 2026 박정현</p>
           <a href="https://github.com/parkjjeonghyun99" target="_blank" rel="noreferrer"
