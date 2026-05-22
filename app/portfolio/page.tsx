@@ -267,7 +267,7 @@ function ProjectCard({ project }: { project: Project }) {
 
 export default function PortfolioPage() {
   return (
-    <main className="min-h-screen bg-gray-50 text-gray-900">
+    <main className="min-h-screen bg-gray-50 text-gray-900 break-keep">
       <section className="bg-white border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-8 py-16 sm:py-24">
           <p className="text-sm text-blue-500 font-semibold tracking-widest uppercase mb-3">Portfolio</p>
