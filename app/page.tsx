@@ -439,14 +439,14 @@ export default function PortfolioPage() {
             팀 프로젝트를 통해 컴퓨터 비전·자연어처리를 활용한 교통사고 협의서 작성 AI 시스템을 개발했습니다.
           </p>
           <p className="mt-2 text-gray-600 text-base sm:text-lg leading-relaxed">
-            프로젝트들을 정리해 Next.js 기반 이력서·포트폴리오 웹 페이지를 개발하고, GitHub 버전 관리와 Vercel 배포까지 전 과정을 수행했습니다.
+            프로젝트들을 정리해 Next.js 기반 이력서·포트폴리오 웹 페이지를 개발하고, GitHub 버전 관리와 Vercel 배포까지 전 과정을 직접 수행했습니다.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href="https://github.com/parkjjeonghyun99" target="_blank" rel="noreferrer"
               className="inline-flex items-center gap-2 bg-gray-900 text-white text-sm font-medium px-5 py-2.5 rounded-xl hover:bg-gray-700 transition">
               GitHub
             </a>
-            <a href="/resume"
+            <a href="https://my-resume-pjh.vercel.app" target="_blank" rel="noreferrer"
               className="inline-flex items-center gap-2 border border-gray-300 text-gray-700 text-sm font-medium px-5 py-2.5 rounded-xl hover:bg-gray-50 transition">
               이력서 보기
             </a>
