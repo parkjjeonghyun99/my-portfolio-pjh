@@ -446,7 +446,7 @@ export default function PortfolioPage() {
               className="inline-flex items-center gap-2 bg-gray-900 text-white text-sm font-medium px-5 py-2.5 rounded-xl hover:bg-gray-700 transition">
               GitHub
             </a>
-            <a href="https://my-resume-pjh.vercel.app" target="_blank" rel="noreferrer"
+            <a href="https://my-resume-pjh-2ut8.vercel.app" target="_blank" rel="noreferrer"
               className="inline-flex items-center gap-2 border border-gray-300 text-gray-700 text-sm font-medium px-5 py-2.5 rounded-xl hover:bg-gray-50 transition">
               이력서 보기
             </a>
