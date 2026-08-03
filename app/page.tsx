@@ -16,7 +16,6 @@ type Project = {
   result: string;
   pdfUrl?: string;
   dataDictUrl?: string;
-  rawDataUrl?: string;
   datasets?: { label: string; url: string }[];
   notebooks?: { label: string; url: string }[];
   color: string;
@@ -34,6 +33,7 @@ type Practice = {
   sections: { title: string; items: string[] }[];
   notebookUrl?: string;
   pptUrl?: string;
+  dataUrl?: string;
 };
 
 const BASE = "https://github.com/parkjjeonghyun99/my-portfolio-pjh/blob/main";
@@ -101,7 +101,6 @@ const PROJECTS: Project[] = [
     tags: ["Random Forest", "XGBoost", "LightGBM", "chi-squared", "ANOVA", "Python"],
     pdfUrl: "/bigdata-project.pdf",
     dataDictUrl: `${BASE}/notebooks/Bigdata_Project/sts_data_dictionary.pdf`,
-    rawDataUrl: `${BASE_TREE}/notebooks/Bigdata_Project/data`,
     notebooks: [
       { label: "전체 분석", url: `${BASE}/notebooks/Bigdata_Project/Bigdata_Project_A4.ipynb` },
       { label: "제강공정 EDA", url: `${BASE}/notebooks/Bigdata_Project/Bigdata_Project_A4_eda_제강공정.ipynb` },
@@ -198,6 +197,7 @@ const PRACTICES: Practice[] = [
     ],
     pptUrl: "/used_car.pdf",
     notebookUrl: `${BASE}/notebooks/Used_Car_Task/Car_예측분석.ipynb`,
+    dataUrl: `${BASE}/notebooks/Used_Car_Task/Car.csv`,
   },
   {
     id: 2,
@@ -247,6 +247,7 @@ const PRACTICES: Practice[] = [
     ],
     pptUrl: "/scale_task.pdf",
     notebookUrl: `${BASE}/notebooks/Scale_Task/종합실습2_Scale불량분석_A4.ipynb`,
+    dataUrl: `${BASE}/notebooks/Scale_Task/SCALE불량.csv`,
   },
 ];
 
@@ -271,7 +272,7 @@ function ProjectCard({ project }: { project: Project }) {
   const badgeBg = project.color === "blue" ? "bg-blue-50 text-blue-700" : "bg-indigo-50 text-indigo-700";
   const headingColor = project.color === "blue" ? "text-blue-600" : "text-indigo-600";
   const dotColor = project.color === "blue" ? "bg-blue-400" : "bg-indigo-400";
-  const hasResources = project.pdfUrl || project.dataDictUrl || project.rawDataUrl || project.datasets || project.notebooks;
+  const hasResources = project.pdfUrl || project.dataDictUrl || project.datasets || project.notebooks;
 
   return (
     <div className={`border-l-4 ${accent} bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-4`}>
@@ -322,12 +323,6 @@ function ProjectCard({ project }: { project: Project }) {
                   <a href={project.dataDictUrl} target="_blank" rel="noreferrer"
                     className="text-xs bg-purple-50 text-purple-600 border border-purple-200 px-2 py-0.5 rounded hover:bg-purple-100 transition">
                     📋 Data Dictionary
-                  </a>
-                )}
-                {project.rawDataUrl && (
-                  <a href={project.rawDataUrl} target="_blank" rel="noreferrer"
-                    className="text-xs bg-orange-50 text-orange-600 border border-orange-200 px-2 py-0.5 rounded hover:bg-orange-100 transition">
-                    📂 Raw Data
                   </a>
                 )}
               </div>
@@ -383,6 +378,12 @@ function PracticeCard({ practice }: { practice: Practice }) {
             <a href={practice.notebookUrl} target="_blank" rel="noreferrer"
               className="text-xs bg-green-50 text-green-600 border border-green-200 px-2 py-0.5 rounded hover:bg-green-100 transition">
               📓 실습 노트북
+            </a>
+          )}
+          {practice.dataUrl && (
+            <a href={practice.dataUrl} target="_blank" rel="noreferrer"
+              className="text-xs bg-orange-50 text-orange-600 border border-orange-200 px-2 py-0.5 rounded hover:bg-orange-100 transition">
+              📊 Data
             </a>
           )}
         </div>
