@@ -429,10 +429,13 @@ export default function PortfolioPage() {
           <p className="text-sm text-blue-500 font-semibold tracking-widest uppercase mb-3">Portfolio</p>
           <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight">
             박정현
-            <span className="block text-2xl sm:text-3xl font-bold text-gray-400 mt-2">
-              AI · Data Analyst
-            </span>
           </h1>
+          <p className="mt-2 text-sm text-gray-400">
+            🔗 my-portfolio-pjh.vercel.app
+          </p>
+          <p className="mt-3 text-2xl sm:text-3xl font-bold text-gray-400">
+            AI · Data Analyst
+          </p>
           <p className="mt-6 text-gray-600 text-base sm:text-lg leading-relaxed">
             통계적 사고를 바탕으로 데이터에서 인사이트를 도출하고, 이를 실제 문제 해결에 연결하는 방향을 추구합니다.
           </p>
